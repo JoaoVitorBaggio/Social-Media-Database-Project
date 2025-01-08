@@ -40,11 +40,15 @@ CREATE TABLE Curtir (
     Perfil_ID INT NOT NULL,
     Publicacao_ID INT,
     Story_ID INT,
+    Data TIMESTAMP NOT NULL,
     
-	UNIQUE (Perfil_ID, Publicacao_ID, Story_ID),
     FOREIGN KEY (Perfil_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
     FOREIGN KEY (Publicacao_ID) REFERENCES Publicacao(ID_Pub) ON DELETE CASCADE,
-
+    
+    -- Garantir que um perfil só possa curtir uma publicação ou story por vez
+    UNIQUE (Perfil_ID, Publicacao_ID),
+    UNIQUE (Perfil_ID, Story_ID),
+    
     -- Das chaves de publicação e story, uma deve ser nula e a outra não
     CHECK (
         (Publicacao_ID IS NOT NULL OR Story_ID IS NOT NULL)
@@ -52,6 +56,7 @@ CREATE TABLE Curtir (
         (Publicacao_ID IS NULL OR Story_ID IS NULL)
     )
 );
+
 
 CREATE TABLE Story (
     ID_Sto INT PRIMARY KEY,
@@ -125,6 +130,7 @@ CREATE TABLE Participacao (
 CREATE TABLE Reagir (
     Perfil_ID INT NOT NULL,
     Emoji VARCHAR(255) NOT NULL,
+    Data TIMESTAMP NOT NULL,
 
     Publicacao_ID INT,
     Mensagem_ID INT,
@@ -134,7 +140,9 @@ CREATE TABLE Reagir (
     FOREIGN KEY (Publicacao_ID) REFERENCES Publicacao(ID_Pub) ON DELETE CASCADE,
     FOREIGN KEY (Mensagem_ID) REFERENCES Mensagem(ID_Msg) ON DELETE CASCADE,
 
-    UNIQUE (Perfil_ID, Publicacao_ID, Mensagem_ID, Story_ID),
+    UNIQUE (Perfil_ID, Publicacao_ID),
+    UNIQUE (Perfil_ID, Mensagem_ID),
+    UNIQUE (Perfil_ID, Story_ID),
     
     -- Das chaves de publicação, mensagem e story, apenas uma deve ser não nula
     CHECK (
@@ -144,3 +152,14 @@ CREATE TABLE Reagir (
         (Story_ID IS NULL OR Mensagem_ID IS NULL)
     )
 );
+
+CREATE VIEW PublicacoesPerfis AS
+SELECT
+    P.ID_Per AS Perfil_ID,
+    P.Nome AS Nome_Perfil,
+    Pub.ID_Pub AS Publicacao_ID,
+    Pub.Data AS Data_Publicacao
+FROM
+    Perfil P
+INNER JOIN
+    Publicacao Pub ON P.ID_Per = Pub.Autor_ID;
