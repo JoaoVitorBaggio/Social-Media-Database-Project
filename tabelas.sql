@@ -153,13 +153,3 @@ CREATE TABLE Reagir (
     )
 );
 
-CREATE VIEW PublicacoesPerfis AS
-SELECT
-    P.ID_Per AS Perfil_ID,
-    P.Nome AS Nome_Perfil,
-    Pub.ID_Pub AS Publicacao_ID,
-    Pub.Data AS Data_Publicacao
-FROM
-    Perfil P
-INNER JOIN
-    Publicacao Pub ON P.ID_Per = Pub.Autor_ID;
