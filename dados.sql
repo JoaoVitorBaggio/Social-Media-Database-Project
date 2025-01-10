@@ -33,7 +33,7 @@ INSERT INTO Publicacao (ID_Pub, Data, Autor_ID, Imagem) VALUES
     (7, '2025-01-07 16:00:00', 7, 'imagem7.jpg'),
     (8, '2025-01-08 17:00:00', 8, 'imagem8.jpg'),
     (9, '2025-01-09 18:00:00', 9, 'imagem9.jpg'),
-    (10, '2025-01-10 19:00:00', 10, 'imagem10.jpg')
+    (10, '2025-01-10 19:00:00', 10, 'imagem10.jpg'),
 
     -- João Silva (ID_Per = 1) posta mais duas fotos
     (11, '2025-01-11 10:00:00', 1, 'imagem11.jpg'),
