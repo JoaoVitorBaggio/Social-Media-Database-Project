@@ -57,7 +57,6 @@ CREATE TABLE Curtir (
     )
 );
 
-
 CREATE TABLE Story (
     ID_Sto INT PRIMARY KEY,
     Data TIMESTAMP NOT NULL,
