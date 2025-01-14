@@ -98,17 +98,17 @@ INSERT INTO Comentario (ID_Com, Data, Texto, Autor_ID, Publicacao_ID, Comentario
     (10, '2025-01-10 12:00:00', 'Adorei isso!', 10, 1, NULL, NULL);
 
 -- Conversa
-INSERT INTO Conversa (ID_Con, Data, DM) VALUES
-    (1, '2025-01-01 09:00:00', TRUE),
-    (2, '2025-01-02 09:00:00', FALSE),
-    (3, '2025-01-03 09:00:00', TRUE),
-    (4, '2025-01-04 09:00:00', FALSE),
-    (5, '2025-01-05 09:00:00', TRUE),
-    (6, '2025-01-06 09:00:00', FALSE),
-    (7, '2025-01-07 09:00:00', TRUE),
-    (8, '2025-01-08 09:00:00', FALSE),
-    (9, '2025-01-09 09:00:00', TRUE),
-    (10, '2025-01-10 09:00:00', FALSE);
+INSERT INTO Conversa (ID_Con, Data) VALUES
+    (1, '2025-01-01 09:00:00'),
+    (2, '2025-01-02 09:00:00'),
+    (3, '2025-01-03 09:00:00'),
+    (4, '2025-01-04 09:00:00'),
+    (5, '2025-01-05 09:00:00'),
+    (6, '2025-01-06 09:00:00'),
+    (7, '2025-01-07 09:00:00'),
+    (8, '2025-01-08 09:00:00'),
+    (9, '2025-01-09 09:00:00'),
+    (10, '2025-01-10 09:00:00');
 
 -- Mensagem
 INSERT INTO Mensagem (ID_Msg, Autor_ID, Data, Texto, Conversa_ID, ID_Story_Ref, ID_Msg_Ref) VALUES
@@ -144,17 +144,13 @@ INSERT INTO Participacao (ID_Con, ID_Per) VALUES
     (10, 10);
 
 -- Reagir
-INSERT INTO Reagir (Perfil_ID, Emoji, Data, Publicacao_ID, Mensagem_ID, Story_ID) VALUES
-    (1, '❤️', '2025-01-01 10:00:00', 2, NULL, NULL),
-    (2, '😂', '2025-01-02 10:00:00', NULL, 1, NULL),
-    (3, '👍', '2025-01-03 10:00:00', NULL, NULL, 2),
-    (4, '👏', '2025-01-04 10:00:00', 5, NULL, NULL),
-    (5, '😍', '2025-01-05 10:00:00', NULL, 4, NULL),
-    (6, '🔥', '2025-01-06 10:00:00', NULL, NULL, 5),
-    (7, '😊', '2025-01-07 10:00:00', 8, NULL, NULL),
-    (8, '😲', '2025-01-08 10:00:00', NULL, 7, NULL),
-    (9, '😎', '2025-01-09 10:00:00', NULL, NULL, 8),
-    (10, '🙌', '2025-01-10 10:00:00', 1, NULL, NULL);
+INSERT INTO Reagir (Perfil_ID, Emoji, Data, Mensagem_ID, Story_ID) VALUES
+    (2, '😂', '2025-01-02 10:00:00', 1, NULL),
+    (3, '👍', '2025-01-03 10:00:00', NULL, 2),
+    (5, '😍', '2025-01-05 10:00:00', 4, NULL),
+    (6, '🔥', '2025-01-06 10:00:00', NULL, 5),
+    (8, '😲', '2025-01-08 10:00:00', 7, NULL),
+    (9, '😎', '2025-01-09 10:00:00', NULL, 8);
 
 -- Curtidas em Stories
 INSERT INTO Curtir (Perfil_ID, Publicacao_ID, Story_ID, Data) VALUES

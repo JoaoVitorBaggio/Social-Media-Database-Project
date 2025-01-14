@@ -156,4 +156,3 @@ CREATE TABLE IF NOT EXISTS Reagir (
         (Story_ID IS NULL OR Mensagem_ID IS NULL)
     )
 );
-

@@ -77,19 +77,6 @@ se ela não existir, ela é criada. */
             END IF;
             -- Garante que o direct exista
             PERFORM garantir_direct(NEW.Perfil_ID, autor_id);
-        -- Senão, se a reação for a um story, garante que o direct exista
-        ELSIF NEW.Publicacao_ID IS NOT NULL THEN
-            -- Debugging statement to check NEW.Publicacao_ID
-            RAISE NOTICE 'Publicacao_ID: %', NEW.Publicacao_ID;
-            -- Busca o autor da publicação
-            autor_id := (SELECT Publicacao.Autor_ID FROM Publicacao WHERE ID_Pub = NEW.Publicacao_ID);
-            RAISE NOTICE 'Autor da publicação: %', autor_id;
-            -- Se o autor for igual ao perfil que reagiu, levanta um erro
-            IF autor_id = NEW.Perfil_ID THEN
-                RAISE EXCEPTION 'Não é possível reagir ao próprio post';
-            END IF;
-            -- Garante que o direct exista
-            PERFORM garantir_direct(NEW.Perfil_ID, autor_id);
         END IF;
         RETURN NEW;
     END;
@@ -100,15 +87,3 @@ se ela não existir, ela é criada. */
     AFTER INSERT ON Reagir
     FOR EACH ROW
     EXECUTE FUNCTION tratar_reacao();
-
-/*
-NOTICE: Publicacao_ID: 2
-NOTICE: Autor da publicação: 2
-NOTICE: Garantir direct entre 1 e 2
-NOTICE: Criando direct entre 1 e 2
-NOTICE: Story_ID: 3
-NOTICE: Autor do story: 3
-NOTICE: Garantir direct entre 3 e 3
-NOTICE: Criando direct entre 3 e 3
-duplicar valor da chave viola a restrição de unicidade "participacao_pkey"
-*/
