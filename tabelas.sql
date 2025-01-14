@@ -1,15 +1,5 @@
-DROP TABLE IF EXISTS Reagir;
-DROP TABLE IF EXISTS Participacao;
-DROP TABLE IF EXISTS Mensagem;
-DROP TABLE IF EXISTS Conversa;
-DROP TABLE IF EXISTS Comentario;
-DROP TABLE IF EXISTS Story;
-DROP TABLE IF EXISTS Curtir;
-DROP TABLE IF EXISTS Publicacao;
-DROP TABLE IF EXISTS Seguir;
-DROP TABLE IF EXISTS Perfil;
 
-CREATE TABLE Perfil (
+CREATE TABLE IF NOT EXISTS Perfil (
     ID_Per INT PRIMARY KEY,
     Nome VARCHAR(255) NOT NULL,
     Foto VARCHAR(255),
@@ -17,7 +7,7 @@ CREATE TABLE Perfil (
     Privado BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE Seguir (
+CREATE TABLE IF NOT EXISTS Seguir (
     Seguidor_ID INT NOT NULL,
     Seguido_ID INT NOT NULL,
     Melhores_Amigos BOOLEAN DEFAULT FALSE,
@@ -27,7 +17,7 @@ CREATE TABLE Seguir (
     FOREIGN KEY (Seguido_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE
 );
 
-CREATE TABLE Publicacao (
+CREATE TABLE IF NOT EXISTS Publicacao (
     ID_Pub INT PRIMARY KEY,
     Data TIMESTAMP NOT NULL,
     Autor_ID INT NOT NULL,
@@ -36,7 +26,7 @@ CREATE TABLE Publicacao (
     FOREIGN KEY (Autor_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE
 );
 
-CREATE TABLE Curtir (
+CREATE TABLE IF NOT EXISTS Curtir (
     Perfil_ID INT NOT NULL,
     Publicacao_ID INT,
     Story_ID INT,
@@ -57,7 +47,7 @@ CREATE TABLE Curtir (
     )
 );
 
-CREATE TABLE Story (
+CREATE TABLE IF NOT EXISTS Story (
     ID_Sto INT PRIMARY KEY,
     Data TIMESTAMP NOT NULL,
     Video BYTEA NOT NULL,
@@ -66,7 +56,7 @@ CREATE TABLE Story (
     FOREIGN KEY (Autor_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE
 );
 
-CREATE TABLE Comentario (
+CREATE TABLE IF NOT EXISTS Comentario (
     ID_Com INT PRIMARY KEY,
     Data TIMESTAMP NOT NULL,
     Texto TEXT NOT NULL,
@@ -89,13 +79,28 @@ CREATE TABLE Comentario (
     )
 );
 
-CREATE TABLE Conversa (
-  ID_Con INT PRIMARY KEY,
-  Data TIMESTAMP NOT NULL,
-  DM BOOLEAN NOT NULL
+CREATE TABLE IF NOT EXISTS Conversa (
+    ID_Con INT PRIMARY KEY DEFAULT (SELECT COALESCE(MAX(ID_Con), 0) + 1 FROM Conversa),
+    Data TIMESTAMP NOT NULL
 );
 
-CREATE TABLE Mensagem (
+CREATE TABLE IF NOT EXISTS Direct(
+    Perfil1_ID INT NOT NULL,
+    Perfil2_ID INT NOT NULL,
+    PRIMARY KEY (Perfil1_ID, Perfil2_ID),
+    FOREIGN KEY (Perfil1_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
+    FOREIGN KEY (Perfil2_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
+
+    -- Garantir que o id do perfil 1 é menor que o do perfil 2
+    -- Isso garante que o direct não seja duplicado
+    CHECK (Perfil1_ID < Perfil2_ID),
+    
+    -- ID da conversa para armazenar mensagens
+    Conversa_ID INT NOT NULL,
+    FOREIGN KEY (Conversa_ID) REFERENCES Conversa(ID_Con) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Mensagem (
     ID_Msg INT PRIMARY KEY,
     Autor_ID INT NOT NULL,
     Data TIMESTAMP NOT NULL,
@@ -117,7 +122,7 @@ CREATE TABLE Mensagem (
     CHECK (ID_Story_Ref IS NULL OR ID_Msg_Ref IS NULL)
 );
 
-CREATE TABLE Participacao (
+CREATE TABLE IF NOT EXISTS Participacao (
   ID_Con INT NOT NULL,
   ID_Per INT NOT NULL,
   
@@ -126,7 +131,7 @@ CREATE TABLE Participacao (
   FOREIGN KEY (ID_Per) REFERENCES Perfil(ID_Per) ON DELETE CASCADE
 );
 
-CREATE TABLE Reagir (
+CREATE TABLE IF NOT EXISTS Reagir (
     Perfil_ID INT NOT NULL,
     Emoji VARCHAR(255) NOT NULL,
     Data TIMESTAMP NOT NULL,

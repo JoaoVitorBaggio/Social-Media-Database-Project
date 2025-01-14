@@ -147,13 +147,13 @@ INSERT INTO Participacao (ID_Con, ID_Per) VALUES
 INSERT INTO Reagir (Perfil_ID, Emoji, Data, Publicacao_ID, Mensagem_ID, Story_ID) VALUES
     (1, '❤️', '2025-01-01 10:00:00', 2, NULL, NULL),
     (2, '😂', '2025-01-02 10:00:00', NULL, 1, NULL),
-    (3, '👍', '2025-01-03 10:00:00', NULL, NULL, 3),
+    (3, '👍', '2025-01-03 10:00:00', NULL, NULL, 2),
     (4, '👏', '2025-01-04 10:00:00', 5, NULL, NULL),
     (5, '😍', '2025-01-05 10:00:00', NULL, 4, NULL),
-    (6, '🔥', '2025-01-06 10:00:00', NULL, NULL, 6),
+    (6, '🔥', '2025-01-06 10:00:00', NULL, NULL, 5),
     (7, '😊', '2025-01-07 10:00:00', 8, NULL, NULL),
     (8, '😲', '2025-01-08 10:00:00', NULL, 7, NULL),
-    (9, '😎', '2025-01-09 10:00:00', NULL, NULL, 9),
+    (9, '😎', '2025-01-09 10:00:00', NULL, NULL, 8),
     (10, '🙌', '2025-01-10 10:00:00', 1, NULL, NULL);
 
 -- Curtidas em Stories
