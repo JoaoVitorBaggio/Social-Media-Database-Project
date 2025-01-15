@@ -1,3 +1,4 @@
+-- @block
 -- Dados dois perfis, cria um direct entre eles, junto da conversa e da participação dos perfis nela
 -- Retorna o id da conversa criada
     CREATE OR REPLACE FUNCTION novo_direct(perfil1 INT, perfil2 INT) RETURNS INT AS $$
@@ -38,6 +39,7 @@
     END;
     $$ LANGUAGE plpgsql;
 
+-- @block
 /* Função que, dados dois perfis, retorna o id da conversa direct entre eles sendo que,
 se ela não existir, ela é criada. */
     CREATE OR REPLACE FUNCTION garantir_direct(perfil1 INT, perfil2 INT) RETURNS INT AS $$
@@ -60,6 +62,7 @@ se ela não existir, ela é criada. */
     END;
     $$ LANGUAGE plpgsql;
 
+-- @block
 /* Função trigger baseada no garantir_direct */
     CREATE OR REPLACE FUNCTION tratar_reacao() RETURNS TRIGGER AS $$
     DECLARE autor_id INT;
@@ -82,6 +85,7 @@ se ela não existir, ela é criada. */
     END;
     $$ LANGUAGE plpgsql;
 
+-- @block
 -- Trigger que chama a função tratar_reacao antes de inserir uma reação
     CREATE OR REPLACE TRIGGER trg_tratar_reacao
     AFTER INSERT ON Reagir

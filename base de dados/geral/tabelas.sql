@@ -1,3 +1,4 @@
+-- @block
 CREATE TABLE IF NOT EXISTS Perfil (
     ID_Per INT PRIMARY KEY,
     Nome VARCHAR(255) NOT NULL,
@@ -6,6 +7,7 @@ CREATE TABLE IF NOT EXISTS Perfil (
     Privado BOOLEAN DEFAULT FALSE
 );
 
+-- @block
 CREATE TABLE IF NOT EXISTS Seguir (
     Seguidor_ID INT NOT NULL,
     Seguido_ID INT NOT NULL,

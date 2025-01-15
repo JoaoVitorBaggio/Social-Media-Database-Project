@@ -1,3 +1,4 @@
+-- @block
 -- Perfil
 INSERT INTO Perfil (ID_Per, Nome, Foto, Descricao, Privado) VALUES
     (1, 'João Silva', 'joao.jpg', 'Descrição de João', FALSE),
@@ -11,6 +12,7 @@ INSERT INTO Perfil (ID_Per, Nome, Foto, Descricao, Privado) VALUES
     (9, 'Rafael Carvalho', 'rafael.jpg', 'Descrição de Rafael', FALSE),
     (10, 'Mariana Barros', 'mariana.jpg', 'Descrição de Mariana', TRUE);
 
+-- @block
 -- Seguir
 INSERT INTO Seguir (Seguidor_ID, Seguido_ID, Melhores_Amigos) VALUES
     (1, 2, TRUE),

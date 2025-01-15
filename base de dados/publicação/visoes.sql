@@ -1,4 +1,4 @@
--- PublicacoesPerfis
+-- @block
 -- Visão que junta perfis com suas publicação
     CREATE OR REPLACE VIEW PublicacoesPerfis AS
     SELECT
@@ -9,7 +9,7 @@
         Perfil p
     RIGHT JOIN Publicacao pub ON p.ID_Per = pub.Autor_ID;
 
--- Criação da visão ResumoPublicacoes
+-- @block
 -- Resumo que consolida o número de curtidas e comentários por publicação
     CREATE OR REPLACE VIEW ResumoPublicacoes AS
     SELECT

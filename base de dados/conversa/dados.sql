@@ -1,4 +1,4 @@
--- Conversa
+-- @block
 INSERT INTO Conversa (ID_Con, Data) VALUES
     (1, '2025-01-01 09:00:00'),
     (2, '2025-01-02 09:00:00'),
@@ -11,7 +11,7 @@ INSERT INTO Conversa (ID_Con, Data) VALUES
     (9, '2025-01-09 09:00:00'),
     (10, '2025-01-10 09:00:00');
 
--- Mensagem
+-- @block
 INSERT INTO Mensagem (ID_Msg, Autor_ID, Data, Texto, Conversa_ID, ID_Story_Ref, ID_Msg_Ref) VALUES
     (1, 1, '2025-01-01 10:00:00', 'Oi!', 1, NULL, NULL),
     (2, 2, '2025-01-02 10:00:00', 'Tudo bem?', 1, 1, NULL),
@@ -24,7 +24,7 @@ INSERT INTO Mensagem (ID_Msg, Autor_ID, Data, Texto, Conversa_ID, ID_Story_Ref, 
     (9, 9, '2025-01-09 10:00:00', 'Olá a todos!', 5, NULL, NULL),
     (10, 10, '2025-01-10 10:00:00', 'Até logo!', 5, 9, NULL);
 
--- Participacao
+-- @block
 INSERT INTO Participacao (ID_Con, ID_Per) VALUES
     (1, 1),
     (2, 3),
@@ -44,7 +44,7 @@ INSERT INTO Participacao (ID_Con, ID_Per) VALUES
     (10, 9),
     (10, 10);
 
--- Reagir
+-- @block
 INSERT INTO Reagir (Perfil_ID, Emoji, Data, Mensagem_ID, Story_ID) VALUES
     (2, '😂', '2025-01-02 10:00:00', 1, NULL),
     (3, '👍', '2025-01-03 10:00:00', NULL, 2),

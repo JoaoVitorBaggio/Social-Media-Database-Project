@@ -1,4 +1,4 @@
--- Publicacao
+-- @block
 INSERT INTO Publicacao (ID_Pub, Data, Autor_ID, Imagem) VALUES
     (1, '2025-01-01 10:00:00', 1, 'imagem1.jpg'),
     (2, '2025-01-02 11:00:00', 2, 'imagem2.jpg'),
@@ -27,6 +27,7 @@ INSERT INTO Publicacao (ID_Pub, Data, Autor_ID, Imagem) VALUES
     (17, '2025-01-17 16:00:00', 4, 'imagem17.jpg'),
     (18, '2025-01-18 17:00:00', 4, 'imagem18.jpg');
 
+-- @block
 -- Curtidas em Publicações
 INSERT INTO Curtir (Perfil_ID, Publicacao_ID, Story_ID, Data) VALUES
     (1, 2, NULL, '2025-01-01 10:10:00'),
@@ -45,7 +46,7 @@ INSERT INTO Curtir (Perfil_ID, Publicacao_ID, Story_ID, Data) VALUES
     (6, 2, NULL, '2025-01-01 10:00:00'),
     (7, 2, NULL, '2025-01-01 10:00:00');
 
--- Story
+-- @block
 INSERT INTO Story (ID_Sto, Data, Video, Autor_ID) VALUES
     (1, '2025-01-01 20:00:00', 'video1.mp4', 1),
     (2, '2025-01-02 21:00:00', 'video2.mp4', 2),
@@ -58,7 +59,7 @@ INSERT INTO Story (ID_Sto, Data, Video, Autor_ID) VALUES
     (9, '2025-01-09 20:00:00', 'video9.mp4', 9),
     (10, '2025-01-10 21:00:00', 'video10.mp4', 10);
 
--- Comentário
+-- @block
 INSERT INTO Comentario (ID_Com, Data, Texto, Autor_ID, Publicacao_ID, Comentario_ID, Story_ID) VALUES
     (1, '2025-01-01 12:00:00', 'Ótima publicação!', 1, 2, NULL, NULL),
     (2, '2025-01-02 12:00:00', 'Adorei isso!', 2, NULL, NULL, 3),
@@ -71,6 +72,7 @@ INSERT INTO Comentario (ID_Com, Data, Texto, Autor_ID, Publicacao_ID, Comentario
     (9, '2025-01-09 12:00:00', 'Bom demais!', 9, NULL, 8, NULL),
     (10, '2025-01-10 12:00:00', 'Adorei isso!', 10, 1, NULL, NULL);
 
+-- @block
 -- Curtidas em Stories
 INSERT INTO Curtir (Perfil_ID, Publicacao_ID, Story_ID, Data) VALUES
     -- João Silva (ID_Per = 1) curte os Stories de Maria Oliveira (ID_Sto = 2) e Carlos Souza (ID_Sto = 3)
