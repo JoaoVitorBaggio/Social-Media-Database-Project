@@ -1,0 +1,17 @@
+CREATE TABLE IF NOT EXISTS Perfil (
+    ID_Per INT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Foto VARCHAR(255),
+    Descricao TEXT NOT NULL,
+    Privado BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE IF NOT EXISTS Seguir (
+    Seguidor_ID INT NOT NULL,
+    Seguido_ID INT NOT NULL,
+    Melhores_Amigos BOOLEAN DEFAULT FALSE,
+
+    PRIMARY KEY (Seguidor_ID, Seguido_ID),
+    FOREIGN KEY (Seguidor_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
+    FOREIGN KEY (Seguido_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE
+);

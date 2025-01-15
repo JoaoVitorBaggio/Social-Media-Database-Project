@@ -1,17 +1,3 @@
--- Esse arquivo contém a criação de gatilhos para a manutenção da tabela Direct e dados relacionados.
-
-/*
-Regras do direct às quais temos que garantir:
-O direct é uma relação única entre dois perfis que contém uma conversa.
-O conversa do direct é para onde vão as DMs e é onde são visualizadas as reações a stories.
-Sendo assim, temos que garantir que:
-    - A relação entre os perfis seja única, mas isso já é garantido na criação da tabela Direct.
-    - A conversa tenha os mesmos dois perfis do direct.
-    - Na modificação das tabelas de reação, garantir que o direct exista.
-    - Ao modificar a tabela participação, garantir que não sejam inseridos participantes que não
-        sejam os dois perfis do direct.
-*/
-
 -- Dados dois perfis, cria um direct entre eles, junto da conversa e da participação dos perfis nela
 -- Retorna o id da conversa criada
     CREATE OR REPLACE FUNCTION novo_direct(perfil1 INT, perfil2 INT) RETURNS INT AS $$
