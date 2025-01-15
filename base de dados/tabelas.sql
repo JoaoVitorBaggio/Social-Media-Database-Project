@@ -84,22 +84,6 @@ CREATE TABLE IF NOT EXISTS Conversa (
     Data TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Direct(
-    Perfil1_ID INT NOT NULL,
-    Perfil2_ID INT NOT NULL,
-    PRIMARY KEY (Perfil1_ID, Perfil2_ID),
-    FOREIGN KEY (Perfil1_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
-    FOREIGN KEY (Perfil2_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
-
-    -- Garantir que o id do perfil 1 é menor que o do perfil 2
-    -- Isso garante que o direct não seja duplicado
-    CHECK (Perfil1_ID < Perfil2_ID),
-    
-    -- ID da conversa para armazenar mensagens
-    Conversa_ID INT NOT NULL,
-    FOREIGN KEY (Conversa_ID) REFERENCES Conversa(ID_Con) ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS Mensagem (
     ID_Msg INT PRIMARY KEY,
     Autor_ID INT NOT NULL,
@@ -122,12 +106,40 @@ CREATE TABLE IF NOT EXISTS Mensagem (
     CHECK (ID_Story_Ref IS NULL OR ID_Msg_Ref IS NULL)
 );
 
-CREATE TABLE IF NOT EXISTS Participacao (
-  ID_Con INT NOT NULL,
+CREATE TABLE IF NOT EXISTS Direct(
+    Perfil1_ID INT NOT NULL,
+    Perfil2_ID INT NOT NULL,
+    PRIMARY KEY (Perfil1_ID, Perfil2_ID),
+    FOREIGN KEY (Perfil1_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
+    FOREIGN KEY (Perfil2_ID) REFERENCES Perfil(ID_Per) ON DELETE CASCADE,
+
+    -- Garantir que o id do perfil 1 é menor que o do perfil 2
+    -- Isso garante que o direct não seja duplicado
+    CHECK (Perfil1_ID < Perfil2_ID),
+    
+    -- ID da conversa para armazenar mensagens
+    Conversa_ID INT NOT NULL,
+    FOREIGN KEY (Conversa_ID) REFERENCES Conversa(ID_Con) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Grupo (
+    ID_Gru INT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Foto BYTEA NOT NULL,
+    Descricao TEXT NOT NULL,
+
+    -- ID da conversa para armazenar mensagens
+    Conversa_ID INT NOT NULL,
+    FOREIGN KEY (Conversa_ID) REFERENCES Conversa(ID_Con) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS Participacao CASCADE;
+CREATE TABLE Participacao (
+  ID_Gru INT NOT NULL,
   ID_Per INT NOT NULL,
   
-  PRIMARY KEY (ID_Con, ID_Per),
-  FOREIGN KEY (ID_Con) REFERENCES Conversa(ID_Con) ON DELETE CASCADE,
+  PRIMARY KEY (ID_Gru, ID_Per),
+  FOREIGN KEY (ID_Gru) REFERENCES Grupo(ID_Gru) ON DELETE CASCADE,
   FOREIGN KEY (ID_Per) REFERENCES Perfil(ID_Per) ON DELETE CASCADE
 );
 
